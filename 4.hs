@@ -9,11 +9,10 @@ main = putStrLn $ show answer
 palindromes = filter isPalindrome productsOf3Digits
 
 productsOf3Digits = productsOf3Digits' 999 999
-productsOf3Digits' a b = [i * b | i <- [999,998..a]] ++ rest
+productsOf3Digits' a = (sort [i * b | i <- [999,998..a], j <- [999,998..a]]) ++ rest
   where
-    rest | a == 100 && b == 100 = []
-         | a == b = productsOf3Digits' (a-1) (a-1) 
-         | otherwise = productsOf3Digits' a (b-1)
+    rest | a == 100 = []
+         | otherwise = productsOf3Digits' (a-1)
 
 isPalindrome n = chars == reverse chars
   where
